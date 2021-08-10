@@ -76,6 +76,7 @@ namespace Picture_Toolbox
 
         private async void button3_Click(object sender, EventArgs e)
         {
+            button3.Enabled = false;
             if (API.Enabled)
                 MessageBox.Show("API KEY NOT SET!!!!!!", "Error");
             else if (SelectedDir.Text == "")
@@ -83,6 +84,7 @@ namespace Picture_Toolbox
             else
                 try
                 {
+                    
                     var supportedExtensions = "*.jpg,*.png";
 
                     var files = Directory.GetFiles(SelectedDir.Text, "*.*", SearchOption.TopDirectoryOnly)
@@ -117,6 +119,7 @@ namespace Picture_Toolbox
                     progressBar1.Value = 0;
                     MessageBox.Show(x.Message, "Error");
                 }
+            button3.Enabled = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -137,6 +140,11 @@ namespace Picture_Toolbox
             s2.Value = Settings.Default.s2;
             comboBox1.Text = Settings.Default.type;
             if (API.Text != "") ValidateAPI_Click(null, null);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/UrekD/Picture-Toolbox");
         }
     }
 }
